@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartScale — Screen Measurement & Calibration Tool</title>
+  <meta name="description" content="Calibrate your screen and measure real-world objects using digital overlays. Measure paper, cards, rings, coins, and more directly on your display.">
+  
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <nav class="navbar" id="app-nav">
+    <div class="nav-container">
+      <a href="#" class="nav-logo" id="logo-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="logo-icon"><path d="M21.3 15.3a2.82 2.82 0 1 1-4 4l-4.3-4.3a8.2 8.2 0 0 1-3-2.2l-3-3a8.2 8.2 0 0 1-2.2-3l-4.3-4.3a2.82 2.82 0 1 1 4-4l4.3 4.3a8.2 8.2 0 0 1 3 2.2l3 3a8.2 8.2 0 0 1 2.2 3l4.3 4.3z"/></svg>
+        <span>SmartScale</span>
+      </a>
+      <div class="nav-links">
+        <button class="nav-link" id="nav-measure" data-view="measure">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
+          Workspace
+        </button>
+        <button class="nav-link" id="nav-ring" data-view="ring">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
+          Ring Tool
+        </button>
+        <button class="nav-link" id="nav-calibrate" data-view="calibrate">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          Calibrate
+        </button>
+      </div>
+      <!-- Uncalibrated Badge removed from here -->
+    </div>
+  </nav>
+
+  <!-- Main View Container -->
+  <main class="main-content">
+
+    <!-- 1. LANDING VIEW -->
+    <section id="view-landing" class="app-view active">
+      <div class="hero-section">
+        <h1 class="hero-title">Measure Real Objects Directly From Your Screen</h1>
+        <p class="hero-subtitle">Calibrate once and measure paper, rings, cards, coins, and more using your browser. Professional, precise overlays.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="landing-start-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Start Measuring
+          </button>
+          <button class="btn btn-secondary" id="landing-calibrate-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+            Calibrate Screen
+          </button>
+        </div>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </div>
+          <h3>Screen Calibration</h3>
+          <p>Align a standard ATM card, ID card, or driver's license with the screen overlay to achieve millimeter-perfect accuracy.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/></svg>
+          </div>
+          <h3>Ring Measurement</h3>
+          <p>Find your ring size in seconds. Place a physical ring on your display and align the circular guide to get instant worldwide sizing.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/></svg>
+          </div>
+          <h3>Shape Measurement</h3>
+          <p>Create and adjust rectangles, squares, circles, and lines. Flexibly size them by dragging edges or corners directly.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <h3>Live Dimensions</h3>
+          <p>A side dashboard updates dynamically in real-time, displaying exact values for width, height, circumference, diameter, radius, area, and perimeter.</p>
+        </div>
+      </div>
+      
+      <div class="landing-footer">
+        <p>SmartScale runs locally in your browser. No data leaves your device. Scale is stored in local storage for future visits.</p>
+      </div>
+    </section>
+
+    <!-- 2. MEASUREMENT WORKSPACE VIEW (Figma Style) -->
+    <section id="view-measure" class="app-view">
+      <div class="workspace-layout">
+        
+        <!-- Figma Left Sidebar: Layers Panel -->
+        <aside class="workspace-layers-panel">
+          <div class="panel-header">
+            <h3>Layers</h3>
+            <span class="layers-count" id="layers-count">0</span>
+          </div>
+          <div class="layers-container">
+            <div class="layers-empty-state" id="layers-empty-state">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+              <p>No shapes added yet</p>
+            </div>
+            <ul class="layers-list" id="layers-list">
+              <!-- Dynamically populated layers list -->
+            </ul>
+          </div>
+        </aside>
+
+        <!-- Figma Center Panel: Canvas Workspace -->
+        <div class="workspace-center">
+          <!-- Toolbar placed right above the viewport -->
+          <div class="canvas-toolbar">
+            <div class="toolbar-group">
+              <span class="toolbar-label">Add:</span>
+              <button class="tool-btn" id="tool-rect" title="Add Rectangle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/></svg>
+                <span>Rectangle</span>
+              </button>
+              <button class="tool-btn" id="tool-square" title="Add Square">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="0"/></svg>
+                <span>Square</span>
+              </button>
+              <button class="tool-btn" id="tool-circle" title="Add Circle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
+                <span>Circle</span>
+              </button>
+              <button class="tool-btn" id="tool-line" title="Add Line">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="18" x2="18" y2="6"/></svg>
+                <span>Line</span>
+              </button>
+            </div>
+            
+            <div class="toolbar-separator"></div>
+
+            <div class="toolbar-group">
+              <span class="toolbar-label">Unit:</span>
+              <div class="unit-selector">
+                <button class="unit-btn active" data-unit="mm">mm</button>
+                <button class="unit-btn" data-unit="cm">cm</button>
+                <button class="unit-btn" data-unit="in">inch</button>
+              </div>
+            </div>
+
+            <div class="toolbar-separator"></div>
+            
+            <div class="toolbar-group">
+              <button class="btn-icon-text danger" id="clear-canvas-btn" title="Clear Canvas">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                Clear
+              </button>
+            </div>
+          </div>
+          
+          <!-- Figma-like Viewport Container -->
+          <div class="canvas-viewport">
+            
+            <!-- Canvas instruction banner (floats at the top center of the viewport) -->
+            <div class="canvas-empty-banner" id="canvas-empty">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="banner-icon"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <span>
+                <strong>Canvas is empty.</strong> Select a tool above to add a shape. Drag shapes to move, and use handles to resize. Select a shape to view precise dimensions.
+              </span>
+            </div>
+
+            <div class="artboard-frame-label">Screen Artboard (1:1 Scale)</div>
+            
+            <!-- Figma-like White sheet inside viewport -->
+            <div class="canvas-board-container">
+              <div class="canvas-board" id="measurement-canvas">
+                <div class="grid-overlay"></div>
+                <!-- Shapes injected here -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Figma Right Sidebar: Properties & Calibration Panel -->
+        <aside class="workspace-sidebar">
+          
+          <!-- Calibration Status Card -->
+          <div class="sidebar-card calibration-card">
+            <div class="card-header">
+              <h3>Calibration Settings</h3>
+              <span class="badge" id="sidebar-calib-status-badge">Default</span>
+            </div>
+            <div class="card-body">
+              <div class="calibration-meta">
+                <div class="meta-row">
+                  <span class="meta-label">Scale Ratio:</span>
+                  <span class="meta-value" id="sidebar-ratio-display">3.78 px/mm</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Estimated DPI:</span>
+                  <span class="meta-value" id="sidebar-dpi-display">96 DPI</span>
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-full btn-sm" id="sidebar-recalibrate-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                Adjust Calibration
+              </button>
+            </div>
+          </div>
+
+          <!-- Live Measurements Panel -->
+          <div class="sidebar-card dimensions-card">
+            <div class="card-header">
+              <h3>Live Dimensions</h3>
+              <span class="accuracy-indicator" id="accuracy-indicator" title="Millimeter-level accuracy based on calibration status">
+                <span class="indicator-dot green"></span>
+                <span>Highly Accurate</span>
+              </span>
+            </div>
+            <div class="card-body" id="dimensions-panel-content">
+              
+              <!-- State when no shape is selected -->
+              <div class="no-selection-state" id="no-shape-selected-msg">
+                <p>No shape selected.</p>
+                <small>Click on any shape on the canvas or layers list to inspect and edit its physical properties.</small>
+              </div>
+
+              <!-- Content when a shape is selected -->
+              <div class="selection-details hidden" id="shape-details-container">
+                <div class="selected-shape-header">
+                  <span class="shape-badge" id="selected-shape-type">Rectangle</span>
+                  <button class="delete-shape-btn" id="delete-selected-btn" title="Delete selected shape">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                  </button>
+                </div>
+
+                <div class="dimension-stats-grid">
+                  
+                  <div class="dim-stat" id="stat-row-1">
+                    <span class="dim-label">Width</span>
+                    <span class="dim-val-container">
+                      <span class="dim-value" id="val-width">0.00</span>
+                      <span class="dim-unit">mm</span>
+                    </span>
+                  </div>
+
+                  <div class="dim-stat" id="stat-row-2">
+                    <span class="dim-label">Height</span>
+                    <span class="dim-val-container">
+                      <span class="dim-value" id="val-height">0.00</span>
+                      <span class="dim-unit">mm</span>
+                    </span>
+                  </div>
+
+                  <div class="dim-stat" id="stat-row-3">
+                    <span class="dim-label">Area</span>
+                    <span class="dim-val-container">
+                      <span class="dim-value" id="val-area">0.00</span>
+                      <span class="dim-unit" id="unit-area">mm²</span>
+                    </span>
+                  </div>
+
+                  <div class="dim-stat" id="stat-row-4">
+                    <span class="dim-label">Perimeter</span>
+                    <span class="dim-val-container">
+                      <span class="dim-value" id="val-perimeter">0.00</span>
+                      <span class="dim-unit">mm</span>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Input Adjustments -->
+                <div class="precision-adjustments">
+                  <h4>Manual Precision Controls</h4>
+                  
+                  <div class="adjust-control-group" id="adj-w-group">
+                    <label for="adj-width" id="adj-width-label">Width:</label>
+                    <div class="input-spinner">
+                      <input type="number" id="adj-width" step="0.5" min="1">
+                      <div class="spinner-actions">
+                        <button class="spin-btn" id="spin-w-up">▲</button>
+                        <button class="spin-btn" id="spin-w-down">▼</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="adjust-control-group" id="adj-h-group">
+                    <label for="adj-height" id="adj-height-label">Height:</label>
+                    <div class="input-spinner">
+                      <input type="number" id="adj-height" step="0.5" min="1">
+                      <div class="spinner-actions">
+                        <button class="spin-btn" id="spin-h-up">▲</button>
+                        <button class="spin-btn" id="spin-h-down">▼</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+          
+          <!-- Quick Instructions Card -->
+          <div class="sidebar-card instructions-card">
+            <div class="card-header">
+              <h3>Quick Controls</h3>
+            </div>
+            <div class="card-body">
+              <ul class="control-list">
+                <li><span class="key-badge">Click</span> on canvas or layers list to select</li>
+                <li><span class="key-badge">Drag</span> body to reposition</li>
+                <li><span class="key-badge">Drag Handles</span> to resize shapes</li>
+                <li><span class="key-badge">Del / Backspace</span> to delete active shape</li>
+                <li><span class="key-badge">Arrow Keys</span> for pixel-perfect positioning</li>
+              </ul>
+            </div>
+          </div>
+
+        </aside>
+      </div>
+    </section>
+
+    <!-- 3. RING MEASUREMENT VIEW -->
+    <section id="view-ring" class="app-view">
+      <div class="ring-tool-layout">
+        <!-- Interactive Ring Area -->
+        <div class="ring-workspace">
+          <div class="ring-workspace-card">
+            <h2>Ring Sizing Overlay</h2>
+            <p class="tool-guide">Place your physical ring directly onto the circular overlay on your display. Adjust the digital circle size using the controls below until the outside edge of the circle perfectly matches the **inside edge** of your physical ring.</p>
+            
+            <div class="ring-canvas-container">
+              <div class="ring-circle-area">
+                <!-- Physical ring placeholder outline to assist visual representation -->
+                <div class="ring-helper-graphic"></div>
+                <!-- Resizable Circle Element -->
+                <div class="ring-overlay-circle" id="ring-circle">
+                  <div class="ring-diameter-line">
+                    <span class="ring-diameter-text" id="ring-diameter-badge">0.0 mm</span>
+                  </div>
+                  <!-- Resize Handle -->
+                  <div class="ring-handle" id="ring-circle-handle"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ring Slider Controls -->
+            <div class="ring-controls">
+              <div class="slider-control">
+                <label for="ring-size-slider">Adjust Circle Size (Diameter):</label>
+                <div class="slider-wrapper">
+                  <input type="range" id="ring-size-slider" min="10" max="30" step="0.1" value="16.5">
+                </div>
+              </div>
+              
+              <div class="precision-actions">
+                <button class="btn btn-secondary btn-sm" id="ring-prec-down">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  Decrease (0.1mm)
+                </button>
+                <span class="ring-current-value-label" id="ring-current-diameter">16.5 mm</span>
+                <button class="btn btn-secondary btn-sm" id="ring-prec-up">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  Increase (0.1mm)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ring Information / Size Chart Sidebar (India Added, Japan/UK/Europe Removed) -->
+        <aside class="ring-sidebar">
+          <div class="sidebar-card ring-details-card">
+            <div class="card-header">
+              <h3>Sizing Results</h3>
+            </div>
+            <div class="card-body">
+              <div class="measurement-meta">
+                <div class="meta-row highlight">
+                  <span class="meta-label">Measured Diameter:</span>
+                  <span class="meta-value accent-text" id="ring-res-diameter">16.50 mm</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Circumference:</span>
+                  <span class="meta-value" id="ring-res-circumference">51.84 mm</span>
+                </div>
+                <div class="meta-row highlight-size">
+                  <span class="meta-label">Estimated US Size:</span>
+                  <span class="meta-value size-text" id="ring-res-us-size">6</span>
+                </div>
+                <div class="meta-row highlight-size">
+                  <span class="meta-label">Estimated India Size:</span>
+                  <span class="meta-value size-text" id="ring-res-in-size">12</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sizing Standards Chart -->
+          <div class="sidebar-card size-chart-card">
+            <div class="card-header">
+              <h3>International Sizing Chart</h3>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-scroll">
+                <table class="size-table" id="ring-size-table">
+                  <thead>
+                    <tr>
+                      <th>Inside Dia (mm)</th>
+                      <th>US / Canada</th>
+                      <th>India</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Table rows mapped to Indian standards -->
+                    <tr data-dia="14.07"><td>14.1 mm</td><td>3</td><td>4</td></tr>
+                    <tr data-dia="14.48"><td>14.5 mm</td><td>3.5</td><td>5</td></tr>
+                    <tr data-dia="14.88"><td>14.9 mm</td><td>4</td><td>7</td></tr>
+                    <tr data-dia="15.29"><td>15.3 mm</td><td>4.5</td><td>8</td></tr>
+                    <tr data-dia="15.70"><td>15.7 mm</td><td>5</td><td>9</td></tr>
+                    <tr data-dia="16.10"><td>16.1 mm</td><td>5.5</td><td>10</td></tr>
+                    <tr data-dia="16.51" class="selected-row"><td>16.5 mm</td><td>6</td><td>12</td></tr>
+                    <tr data-dia="16.92"><td>16.9 mm</td><td>6.5</td><td>13</td></tr>
+                    <tr data-dia="17.32"><td>17.3 mm</td><td>7</td><td>14</td></tr>
+                    <tr data-dia="17.73"><td>17.7 mm</td><td>7.5</td><td>15</td></tr>
+                    <tr data-dia="18.14"><td>18.1 mm</td><td>8</td><td>17</td></tr>
+                    <tr data-dia="18.54"><td>18.5 mm</td><td>8.5</td><td>18</td></tr>
+                    <tr data-dia="18.95"><td>19.0 mm</td><td>9</td><td>19</td></tr>
+                    <tr data-dia="19.35"><td>19.4 mm</td><td>9.5</td><td>21</td></tr>
+                    <tr data-dia="19.76"><td>19.8 mm</td><td>10</td><td>22</td></tr>
+                    <tr data-dia="20.17"><td>20.2 mm</td><td>10.5</td><td>23</td></tr>
+                    <tr data-dia="20.57"><td>20.6 mm</td><td>11</td><td>25</td></tr>
+                    <tr data-dia="20.98"><td>21.0 mm</td><td>11.5</td><td>26</td></tr>
+                    <tr data-dia="21.39"><td>21.4 mm</td><td>12</td><td>28</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 4. CALIBRATION WIZARD VIEW -->
+    <section id="view-calibrate" class="app-view">
+      <div class="calibrate-container">
+        <div class="calibrate-wizard-card">
+          <div class="wizard-header">
+            <h2>Screen Calibration Wizard</h2>
+            <p>Ensure measurements are pixel-perfect on your display. We use a standard credit card (or any bank card/ID card) which measures exactly **85.60 mm × 53.98 mm**.</p>
+          </div>
+          
+          <div class="wizard-steps-indicator">
+            <div class="step-indicator active" id="step-ind-1">
+              <span class="step-num">1</span>
+              <span class="step-lbl">Place Card</span>
+            </div>
+            <div class="step-arrow">➔</div>
+            <div class="step-indicator" id="step-ind-2">
+              <span class="step-num">2</span>
+              <span class="step-lbl">Align Overlay</span>
+            </div>
+            <div class="step-arrow">➔</div>
+            <div class="step-indicator" id="step-ind-3">
+              <span class="step-num">3</span>
+              <span class="step-lbl">Done</span>
+            </div>
+          </div>
+
+          <!-- STEP 1 CONTENT -->
+          <div class="wizard-step-content" id="calib-step-1">
+            <div class="step-instruction-block">
+              <div class="instruction-img">
+                <!-- SVG diagram of placing card on screen -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" width="100%" height="120" class="step-svg">
+                  <!-- screen -->
+                  <rect x="10" y="10" width="180" height="100" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="3"/>
+                  <!-- stand -->
+                  <path d="M85 110 h30 l5 10 h-40 z" fill="#cbd5e1"/>
+                  <rect x="92" y="105" width="16" height="6" fill="#94a3b8"/>
+                  <!-- card overlay guide -->
+                  <rect x="50" y="30" width="100" height="60" rx="4" fill="none" stroke="#2563eb" stroke-dasharray="4 2" stroke-width="1.5"/>
+                  <!-- physical card hand silhouette / representation -->
+                  <g opacity="0.8">
+                    <rect x="55" y="35" width="100" height="60" rx="4" fill="#3b82f6" fill-opacity="0.15" stroke="#3b82f6" stroke-width="2"/>
+                    <rect x="65" y="45" width="20" height="15" rx="1" fill="#f59e0b"/>
+                    <rect x="65" y="70" width="50" height="5" rx="1" fill="#94a3b8"/>
+                    <rect x="65" y="80" width="30" height="5" rx="1" fill="#94a3b8"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="instruction-text">
+                <h3>Step 1: Get a physical card</h3>
+                <p>Find a standard plastic card (ATM card, credit card, debit card, driver's license, or transit pass).</p>
+                <p>These cards adhere to the ISO/IEC 7810 ID-1 standard, which guarantees they are exactly 85.60 mm wide and 53.98 mm high.</p>
+                <p>Hold the card up to your screen, ready to align it with the digital outline in the next step.</p>
+              </div>
+            </div>
+            
+            <div class="wizard-actions">
+              <button class="btn btn-secondary" id="calib-cancel-1">Cancel</button>
+              <button class="btn btn-primary" id="calib-next-1">Next: Align Overlay ➔</button>
+            </div>
+          </div>
+
+          <!-- STEP 2 CONTENT -->
+          <div class="wizard-step-content hidden" id="calib-step-2">
+            <div class="step-instruction-block flex-col">
+              <p class="step-subtext">Hold your physical card flat against your screen. Drag the handles or use the controls below to resize the blue digital card overlay until it matches your physical card **exactly (1:1 scale)**.</p>
+              
+              <!-- Calibration Interactive Box -->
+              <div class="calib-interactive-area">
+                <div class="calib-overlay-card" id="calib-card-overlay">
+                  <div class="calib-card-graphic">
+                    <div class="calib-card-chip"></div>
+                    <div class="calib-card-brand">SmartScale</div>
+                    <div class="calib-card-number">•••• •••• •••• ••••</div>
+                    <div class="calib-card-size-label">85.60 x 53.98 mm</div>
+                  </div>
+                  <!-- Corner Drag Handles -->
+                  <div class="calib-handle handle-nw" data-handle="nw"></div>
+                  <div class="calib-handle handle-ne" data-handle="ne"></div>
+                  <div class="calib-handle handle-sw" data-handle="sw"></div>
+                  <div class="calib-handle handle-se" data-handle="se"></div>
+                  <!-- Edge Handles -->
+                  <div class="calib-handle handle-n" data-handle="n"></div>
+                  <div class="calib-handle handle-s" data-handle="s"></div>
+                  <div class="calib-handle handle-e" data-handle="e"></div>
+                  <div class="calib-handle handle-w" data-handle="w"></div>
+                </div>
+              </div>
+
+              <!-- Tuning Controls -->
+              <div class="calibration-tuning-panel">
+                <div class="tuning-slider-container">
+                  <label for="calib-scale-slider">Quick Scaling Slider:</label>
+                  <input type="range" id="calib-scale-slider" min="150" max="600" step="1" value="324">
+                </div>
+                
+                <div class="precision-grid">
+                  <div class="precision-group">
+                    <span class="precision-label">Width (pixels):</span>
+                    <div class="precision-actions-inline">
+                      <button class="btn btn-icon btn-sm" id="calib-w-down" title="Decrease Width 1px">-</button>
+                      <span class="precision-val" id="calib-px-width">324 px</span>
+                      <button class="btn btn-icon btn-sm" id="calib-w-up" title="Increase Width 1px">+</button>
+                    </div>
+                  </div>
+
+                  <div class="precision-group">
+                    <span class="precision-label">Height (pixels):</span>
+                    <div class="precision-actions-inline">
+                      <button class="btn btn-icon btn-sm" id="calib-h-down" title="Decrease Height 1px">-</button>
+                      <span class="precision-val" id="calib-px-height">204 px</span>
+                      <button class="btn btn-icon btn-sm" id="calib-h-up" title="Increase Height 1px">+</button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="ratio-lock-option">
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="calib-lock-ratio" checked>
+                    <span class="checkmark"></span>
+                    Lock card aspect ratio (Recommended)
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="wizard-actions">
+              <button class="btn btn-secondary" id="calib-prev-2">Back</button>
+              <button class="btn btn-primary" id="calib-save-btn">Save Calibration ✓</button>
+            </div>
+          </div>
+
+          <!-- STEP 3 CONTENT -->
+          <div class="wizard-step-content hidden" id="calib-step-3">
+            <div class="success-screen">
+              <div class="success-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <h3>Calibration Successful!</h3>
+              <p>Your screen calibration parameters have been saved. Your device scaling is now computed as:</p>
+              
+              <div class="results-box">
+                <div class="res-row">
+                  <span class="res-label">Pixel-to-Millimeter Ratio (X):</span>
+                  <span class="res-val" id="calib-res-ratio-x">3.78 px/mm</span>
+                </div>
+                <div class="res-row">
+                  <span class="res-label">Pixel-to-Millimeter Ratio (Y):</span>
+                  <span class="res-val" id="calib-res-ratio-y">3.78 px/mm</span>
+                </div>
+                <div class="res-row">
+                  <span class="res-label">Calculated Screen DPI:</span>
+                  <span class="res-val" id="calib-res-dpi">96.0 DPI</span>
+                </div>
+              </div>
+
+              <p class="success-note">SmartScale has saved these settings locally. You can recalibrate at any time using the navigation link.</p>
+            </div>
+
+            <div class="wizard-actions justify-center">
+              <button class="btn btn-primary" id="calib-done-btn">Go to Workspace ➔</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
